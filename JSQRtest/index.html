@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+    <title>QRコードのテスト</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+        <div id="wrapper">
+            <video id="video" autoplay muted playsinline></video>
+            <canvas id="camera-canvas"></canvas>
+            <canvas id="rect-canvas"></canvas>
+            <span id="qr-msg">QRコード: 見つかりません</span>
+        </div>
+    <script src="./jsQR.js"></script>
+    <script src="./script.js"></script>
+    <input type="hidden" name="userid" value="qr-msg" />
+    <script>
+        document.getElementById('qr-msg').addEventListener('change', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'サーバーURL');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200 && xhr.responseText !== 'qr-msg') {
+                    alert('Something went wrong.  Name is now ' + xhr.responseText);
+                }
+                else if (xhr.status !== 200) {
+                    alert('Request failed.  Returned status of ' + xhr.status);
+                }
+            };
+            xhr.send(encodeURI('name=' + document.getElementById('qr-msg').value));
+        });
+    </script>
+</body>
+</html>
