@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang ="ja">
+    <head>    
+        <meta charset="utf-8">
+        <title>making_qrcode</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.js"></script>
+    </head>
+<body>
+    <h1>QRコード表示ページ</h1>
+    <div class="qrblock">
+        <p class="qrcomment">QRコードで生成したい文字列を入力</p>
+        <input id="isbn" type="text" name="isbn" value=""> <button id="getqrInfo" class="btn btn-default">QRコードを生成</button>
+      </div>
+      <div id="from-cookie"></div>
+      <div id="qrOutput">
+        <canvas id="qr"></canvas>
+        <div><img id="newImg"></div>
+      </div>
+    <script>
+        let cookie = document.cookie
+       document.getElementById('from-cookie').addEventListener('load', () => {
+  // IDを取得
+  let userInput = document.getElementById('from-cookie').value;
+  let query = userInput.split(' ').join('+');
+  // QRコードの生成
+  (function() {
+     let qr = new QRious({
+       element: document.getElementById('qr'),
+       // 入力された文字列でQRコード生成
+       value: query
+  });
+  qr.background = '#FFF'; //背景色
+  qr.backgroundAlpha = 0.8; // 背景の透過率
+  qr.foreground = '#000000'; //QRコード自体の色
+  qr.foregroundAlpha = 1.0; //QRコード自体の透過率
+  qr.level = 'L'; // QRコードの誤り訂正レベル
+  qr.size = 240; // QRコードのサイズ
+     // QRコードをflexboxで表示
+     document.getElementById('qrOutput').style.display = 'flex';
+  })();
+// png出力用コード
+let cvs = document.getElementById("qr");
+let png = cvs.toDataURL();
+document.getElementById("newImg").src = png;
+});
+    </script>
+<style>
+    #qrOutput {
+        display: none;
+    }
+    .qrblock {
+        display: block;
+        text-align: center;
+    }
+    p.qrcomment {
+        background: #eff1f5;
+        text-align: center;
+        color: #707070;
+        padding: 7px 35px 8px;
+        border-radius: 9999px;
+        display: inline-block;
+        margin: 0 0 25px;
+        position: relative;
+    }
+    p.qrcomment:after {
+        content: "";
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        margin-left: -15px;
+        border: 15px solid transparent;
+        border-top: 15px solid #eff1f5;
+        z-index: 1;
+    }
+    #qrOutput {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        padding: 20px;
+    }
+    </style>
+</body>
+</html>

@@ -40,11 +40,12 @@ const checkImage = () => {
    if (code) {
       console.log("QRcodeが見つかりました", code);
       drawRect(code.location);
-      document.getElementById('qr-msg').textContent = `QRコード：${code.data}`;
+//      document.getElementById('qr-msg').textContent = code.data;
+      document.getElementById('qr-msg').value = code.data;
    } else {
       console.log("QRcodeが見つかりません…", code);
       rectCtx.clearRect(0, 0, contentWidth, contentHeight);
-      document.getElementById('qr-msg').textContent = `QRコード: 見つかりません`;
+      document.getElementById('qr-msg').textContent = `見つかりません`;
    }
    setTimeout(()=>{ checkImage() }, 500);
 }

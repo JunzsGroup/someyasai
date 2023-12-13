@@ -10,7 +10,7 @@
 }
 
 #camera-canvas{
-    position: absolute;
+    position: relative;
     top: 0px;
     left: 0px;
     z-index: 50;
@@ -22,9 +22,10 @@
     left: 0px;
     z-index: 100;
 }
-
+/*
 #qr-msg{
     position: absolute;
     top: 500px;
     left: 0px;
 }
+*/

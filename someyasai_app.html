@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>第62回染谷祭</title>
+</head>
+<body>
+  localStrageに保存する値を入力して下さい<br />
+  <input name="qrcode_in" id="qrcode_in" type="text" value="" />
+  <br />
+  <input type="button" value="読込" id="read_btn"/>
+  <input type="button" value="保存" id="save_btn"/>
+  <br /><br />
+  <div id="qrcode_out"></div>
+<h1>ホーム画面</h1>
+<script>
+  // 読込
+  //　ログイン画面に来たらcookieから文字列(ID)を取得
+  //　それを基にQRコードを作成
+  function load() {
+    let qrcode = "";
+    if(!localStorage.getItem('qrcode')) {
+      qrcode = "データがありません";
+    } else {
+      qrcode = localStorage.getItem('qrcode');
+    }
+    console.log(`qrcode= ${qrcode}`);
+    document.getElementById("qrcode_out").innerHTML = qrcode;
+  }
+  // 保存
+  function save() {
+    let qrcode = document.getElementById("qrcode_in").value;
+    console.log(`qrcode_in = ${qrcode_in}`);
+    localStorage.setItem('qrcode', qrcode);
+  }
+  document.getElementById("read_btn").addEventListener("click", load);
+  document.getElementById("save_btn").addEventListener("click", save);
+</script> 
+</body>
+</html>
