@@ -3,7 +3,6 @@
     <meta charset="utf-8">
     <title>QRコードのテスト</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
         <div id="wrapper">
@@ -13,12 +12,34 @@
         </div>
         <form action="next.php"  method="POST">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
+　　　　  <select name ="class">
+				<option value="class1"disabled>クラス名を入力</option>
+				<option value="class2">1年1組</option>
+				<option value="class3">1年2組</option>
+				<option value="class4">1年3組</option>
+				<option value="class5">1年4組</option>
+				<option value="class6">1年5組</option>
+				<option value="class7">1年6組</option>
+				<option value="class8">1年7組</option>
+				<option value="class9">2年1組</option>
+			   <option value="class10">2年2組</option>
+				<option value="class11">2年3組</option>
+				<option value="class12">2年4組</option>
+				<option value="class13">2年5組</option>
+				<option value="class14">2年6組</option>
+				<option value="class15">2年7組</option>
+				<option value="class16">3年1組</option>
+				<option value="class17">3年2組</option>
+				<option value="class18">3年3組</option>
+				<option value="class19">3年4組</option>
+				<option value="class20">3年5組</option>
+				<option value="class21">3年6組</option>
+				<option value="class22">3年7組</option>
             <input type="submit">
         </form>
         <script src="./jsQR.js"></script>
     <script src="./script.js"></script>
     <script>
-
 /*
 document.getElementById('qr-msg').addEventListener('change', function() {
             var xhr = new XMLHttpRequest();
