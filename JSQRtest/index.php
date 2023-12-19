@@ -1,3 +1,24 @@
+<?php 
+$dsn      = 'mysql:dbname=junzs_schoolfes;host=localhost';
+$user     = 'junzs_wp1';
+$password = 'junzssomeyafes';
+
+try {
+    $PDO = new PDO($dsn, $user, $password);
+    $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $sql = "SELECT * FROM `class`";
+    $stmt = $PDO->prepare($sql);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    var_dump($rows);
+
+} catch (PDOException $e) {
+    exit('データベースに接続できませんでした。' . $e->getMessage());
+
+}
+?>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -13,28 +34,12 @@
         <form action="next.php"  method="POST">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
 　　　　  <select name ="class">
-				<option value="class1"disabled>クラス名を入力</option>
-				<option value="class2">1年1組</option>
-				<option value="class3">1年2組</option>
-				<option value="class4">1年3組</option>
-				<option value="class5">1年4組</option>
-				<option value="class6">1年5組</option>
-				<option value="class7">1年6組</option>
-				<option value="class8">1年7組</option>
-				<option value="class9">2年1組</option>
-			   <option value="class10">2年2組</option>
-				<option value="class11">2年3組</option>
-				<option value="class12">2年4組</option>
-				<option value="class13">2年5組</option>
-				<option value="class14">2年6組</option>
-				<option value="class15">2年7組</option>
-				<option value="class16">3年1組</option>
-				<option value="class17">3年2組</option>
-				<option value="class18">3年3組</option>
-				<option value="class19">3年4組</option>
-				<option value="class20">3年5組</option>
-				<option value="class21">3年6組</option>
-				<option value="class22">3年7組</option>
+				<option value="0" disabled>クラス名を入力</option>
+<?php
+foreach ($rows as $k => $v) { ?>
+				<option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
+    <?php } ?>
+　　　　  </select>
             <input type="submit">
         </form>
         <script src="./jsQR.js"></script>
@@ -46,10 +51,10 @@ document.getElementById('qr-msg').addEventListener('change', function() {
             xhr.open('POST', 'サーバーURL');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onload = function() {
-                if (xhr.status === 200 && xhr.responseText !== 'qr-msg') {
+                if (xhr.status == 200 && xhr.responseText != 'qr-msg') {
                     alert('Something went wrong.  Name is now ' + xhr.responseText);
                 }
-                else if (xhr.status !== 200) {
+                else if (xhr.status != 200) {
                     alert('Request failed.  Returned status of ' + xhr.status);
                 }
             };
