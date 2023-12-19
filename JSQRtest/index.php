@@ -1,7 +1,6 @@
 <?php 
-$dsn      = 'mysql:dbname=junzs_schoolfes;host=localhost';
-$user     = 'junzs_wp1';
-$password = 'junzssomeyafes';
+
+require_once 'config.php';
 
 try {
     $PDO = new PDO($dsn, $user, $password);
@@ -12,7 +11,6 @@ try {
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    var_dump($rows);
 
 } catch (PDOException $e) {
     exit('データベースに接続できませんでした。' . $e->getMessage());

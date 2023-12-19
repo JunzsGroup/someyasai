@@ -6,9 +6,7 @@ if (!isset($_POST['qr'])  ||  $_POST['qr']===''){
     exit;
 }
 
-$dsn      = 'mysql:dbname=junzs_schoolfes;host=localhost';
-$user     = 'junzs_wp1';
-$password = 'junzssomeyafes';
+require_once 'config.php';
 
 try {
     $PDO = new PDO($dsn, $user, $password);
@@ -30,5 +28,4 @@ try {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 }
 
-$PDO = null;
 ?>
