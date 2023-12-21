@@ -15,7 +15,7 @@ try {
     $code = $_POST['qr'];
     $class = $_POST['class'];
 
-    $sql = "INSERT INTO queue (class, code) VALUES (:class, :code)";
+    $sql = "INSERT INTO queue (class, code, start) VALUES (:class, :code, NOW())";
     $stmt = $PDO->prepare($sql);
     $stmt->bindValue(':class', $class, PDO::PARAM_STR);
     $stmt->bindValue(':code', $code, PDO::PARAM_STR);
