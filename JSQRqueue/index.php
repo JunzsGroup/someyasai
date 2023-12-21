@@ -20,7 +20,7 @@ try {
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>QRコードのテスト</title>
+    <title>待ち行列用</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

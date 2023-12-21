@@ -20,7 +20,7 @@ try {
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <title>入場用</title>
+    <title>退場用</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
