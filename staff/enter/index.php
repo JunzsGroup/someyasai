@@ -16,6 +16,12 @@ try {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 
 }
+session_start();
+if(empty($_SESSION['userid'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <head>

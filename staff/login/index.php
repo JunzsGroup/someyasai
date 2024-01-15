@@ -25,14 +25,24 @@ if(empty($_SESSION['userid'])) {
 
 echo 'こんにちは！ ' . $_SESSION['username'] . 'さん';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>管理ページ</title>
 </head>
 <body>
+    <form action="../queue/index.php" method="post">
+        <input type="submit" value="待ち行列用">
+    </form>
+    <form action="../enter/index.php" method="post">
+        <input type="submit" value="入場用">
+    </form>
+    <form action="../leave/index.php" method="post">
+        <input type="submit" value="退場用">
+    </form>
     <form action="logout.php" method="post">
     <input type="submit" name="logout" value="ログアウト">
 </form>
