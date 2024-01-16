@@ -98,14 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 10px;
             border: none;
             border-radius: 3px;
-            background-color: #5cb85c;
+            background-color: #ff8c00;
             color: white;
             cursor: pointer;
             font-size: 16px;
         }
 
         .form-group input[type="submit"]:hover {
-            background-color: #4cae4c;
+            background-color: #ff8c00;
         }
 
         .error {

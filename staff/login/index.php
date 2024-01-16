@@ -45,14 +45,14 @@ if(empty($_SESSION['userid'])) {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    background-color: #4cae4c; 
+    background-color: #ff8c00; 
     color: white;
     display: block; /* ブロック要素として表示 */
 }
 
 
 .action-buttons input[type="submit"]:hover {
-    background-color: #4cae4c; 
+    background-color: #ff8c00; 
 }
 
 

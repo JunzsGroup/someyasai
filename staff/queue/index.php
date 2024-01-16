@@ -27,18 +27,24 @@ if(empty($_SESSION['userid'])) {
 <head>
     <meta charset="utf-8">
     <title>待ち行列用</title>
+
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-        <div id="wrapper">
+    <img src="../logo.png" alt="ロゴ" class="logo">
+            <div id="wrapper">
             <video id="video" autoplay muted playsinline></video>
             <canvas id="camera-canvas"></canvas>
             <canvas id="rect-canvas"></canvas><br>
         </div>
+        <div class="from">
         <form action="next.php"  method="POST">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
 　　　　  <select name ="class">
 				<option value="0" disabled>クラス名を入力</option>
+        </div>
+
 <?php
 foreach ($rows as $k => $v) { ?>
 				<option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>

@@ -4,28 +4,63 @@
 
 #video{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 100px; 
+    left: 100px; 
     visibility: hidden;
 }
 
 #camera-canvas{
     position: relative;
-    top: 0px;
-    left: 0px;
+    top: 0px; 
+    left: 100px; 
     z-index: 50;
 }
 
 #rect-canvas{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 100px; 
+    left: 100px; 
     z-index: 100;
 }
-/*
-#qr-msg{
-    position: absolute;
-    top: 500px;
-    left: 0px;
+
+.logo {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 150px; 
+    height: auto;
+    z-index: 200;
 }
-*/
+
+@media (max-width: 500px) {
+    .logo {
+        width: 100px; 
+    }
+    #video, #camera-canvas, #rect-canvas {
+        width: 100%; 
+    }
+}
+
+form {
+    margin: 0;
+    padding: 15px;
+    top: 300px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+
+input[type="submit"] {
+
+    background-color: #ff8c00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+input[type="submit"]:hover {
+    background-color: #ff8c00;
+}
