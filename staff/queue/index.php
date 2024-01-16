@@ -27,7 +27,7 @@ if(empty($_SESSION['userid'])) {
 <head>
     <meta charset="utf-8">
     <title>待ち行列用</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -38,7 +38,7 @@ if(empty($_SESSION['userid'])) {
             <canvas id="camera-canvas"></canvas>
             <canvas id="rect-canvas"></canvas><br>
         </div>
-        <div class="from">
+        <div class="form">
         <form action="next.php"  method="POST">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
 　　　　  <select name ="class">
