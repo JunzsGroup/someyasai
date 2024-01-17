@@ -40,17 +40,22 @@ if(empty($_SESSION['userid'])) {
         <div class="form">
         <form action="next.php"  method="POST">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
-　　　　  <select name ="class">
-				<option value="0" disabled>クラス名を入力</option>
-        </div>
+            <br><?
+echo  ''. $_SESSION['username'] . 'としてログイン中';
+?>
+<input type="hidden" id="username" name="class" value="<?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES, 'UTF-8'); ?>">
 
-<?php
+        <?php
+        
+/*
 foreach ($rows as $k => $v) { ?>
 				<option value="<?= $v['id'] ?>"><?= $v['name'] ?></option>
     <?php } ?>
-　　　　  </select>
+*/
+?>
             <input type="submit">
         </form>
+        </div>
         <script src="./jsQR.js"></script>
     <script src="./script.js"></script>
     <script>
@@ -70,6 +75,7 @@ document.getElementById('qr-msg').addEventListener('change', function() {
             xhr.send(encodeURI('name=' + document.getElementById('qr-msg').value));
         });
 */
+
     </script>
 </body>
 </html>
