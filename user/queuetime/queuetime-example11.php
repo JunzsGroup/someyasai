@@ -80,6 +80,7 @@ $pdo = null;
         ul.cardlist >li {
             margin: 40px 1em;
             padding: 0;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
 
         }
         ul.cardlist > li > a {
@@ -113,8 +114,14 @@ $pdo = null;
         .waitpeople {
             margin-top: 5px;
         }
+        .logo {
+        height: 100px; /* ロゴの高さ実質ここでロゴの大きさを指定 */
+        width: auto; /* 幅は自動調整 */
+        margin-left: 20px; /* 左の余白 */
+    }
       </style>
     <title>待ち時間</title>
+    <img src="../logo.png" alt="ロゴ" class="logo">
 </head>
 <body>
 
