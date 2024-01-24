@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>なんとなく</title>
+</head>
+<body>
+  <div class="navbar bg-base-100">
+    <div class="flex-1">
+      <img src="./logo.png" alt="ロゴ" class="btn btn-ghost text-xl">
+    </div>
+    <div class="flex-none">
+      <ul class="menu menu-horizontal px-1">
+        <li><a>Link</a></li>
+        <li>
+          <details>
+            <summary>
+              Parent
+            </summary>
+            <ul class="p-2 bg-base-100 rounded-t-none">
+              <li><a>Link 1</a></li>
+              <li><a>Link 2</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
