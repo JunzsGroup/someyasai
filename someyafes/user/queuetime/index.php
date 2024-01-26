@@ -31,12 +31,12 @@ $queuepeoples = $result->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = <<<queti
 SELECT username, Q.queue_people_count, T.avg_enjoy_time * Q.queue_people_count AS queuetime
-FROM junzs_login.users LEFT JOIN (
+    FROM junzs_login.users LEFT JOIN (
     SELECT class, AVG(TIMESTAMPDIFF(MINUTE, enter, leaving)) AS avg_enjoy_time
     FROM junzs_schoolfes.queue WHERE enter IS NOT NULL AND leaving IS NOT NULL
     GROUP BY class
 ) AS T ON junzs_login.users.username = T.class
-LEFT JOIN (
+    LEFT JOIN (
     SELECT class, COUNT(*) AS queue_people_count
     FROM queue
     WHERE enter IS NULL AND leaving IS NULL AND start IS NOT NULL
@@ -58,10 +58,7 @@ $wpurls = array_column($rows, 'wpurls', 'username');
 
 
 
-//$queuetime = $extime * $queuepeople;
-//ここに総待ち時間の計算
 
-//echo  '1年1組の待ち時間は'. $queuetime . '分';
 
 
 $pdo = null;
@@ -119,6 +116,7 @@ $pdo = null;
         width: auto; 
         margin-left: 20px; 
     }
+
       </style>
     <title>待ち時間</title>
     <img src="../logo.png" alt="ロゴ" class="logo">
