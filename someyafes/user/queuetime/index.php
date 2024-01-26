@@ -115,9 +115,9 @@ $pdo = null;
             margin-top: 5px;
         }
         .logo {
-        height: 100px; /* ロゴの高さ実質ここでロゴの大きさを指定 */
-        width: auto; /* 幅は自動調整 */
-        margin-left: 20px; /* 左の余白 */
+        height: 100px; 
+        width: auto; 
+        margin-left: 20px; 
     }
       </style>
     <title>待ち時間</title>
