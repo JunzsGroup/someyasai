@@ -61,8 +61,10 @@ input[type="submit"]:hover {
     <title>予約</title>
 </head>
 <body>
+    <? session_start(); ?>
     <div class="form">
     <form action="reservation.php" method="POST">
+        <input type="hidden" name="customerid" value="<?php echo $_SESSION['customerid']; ?>">
         <label for="class">行きたいクラス:</label>
         <select name="class" id="class">
             <?php
@@ -87,7 +89,7 @@ input[type="submit"]:hover {
         </select>
         <br>
         <div class="entertime">
-            <label for="start_time">予約時間</label>
+            <label for="enter_time">予約時間</label>
             <input type="time" id="enter_time" name="enter_time" required>
         </div>
         <br>
