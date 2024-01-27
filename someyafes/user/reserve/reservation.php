@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':class', $class, PDO::PARAM_STR);
         $stmt->bindParam(':time', $time, PDO::PARAM_STR);
         $stmt->execute();
-    } else {
-        $message = "こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります";
+    }     } else {
+        $message = "こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります。<br><a href='https://junzs.net/someyafes/user/userid/'>こちら</a>からQRコードを取得してください。";
     }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
