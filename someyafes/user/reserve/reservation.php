@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>予約完了</title>
+    <title>予約</title>
 </head>
 <body>
     <h2><?php echo $class; ?>で<?php echo $time; ?>の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>
