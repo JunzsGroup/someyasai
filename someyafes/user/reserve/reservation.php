@@ -12,7 +12,7 @@ try {
 } catch (PDOException $e) {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 }
-
+$message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
@@ -24,8 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':class', $class, PDO::PARAM_STR);
         $stmt->bindParam(':time', $time, PDO::PARAM_STR);
         $stmt->execute();
-
-        $message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
+        
 }
 
 ?>
