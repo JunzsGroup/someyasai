@@ -14,7 +14,6 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['customerid'])) {
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
         $time = $_POST['enter_time'];
@@ -27,9 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         $message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
-    } else {
-        $message = "<h2>こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります。<br><a href='https://junzs.net/someyafes/user/userid/'>こちら</a>からQRコードを取得してください。</h2>";
-    }
 }
 
 ?>
