@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':class', $class, PDO::PARAM_STR);
         $stmt->bindParam(':time', $time, PDO::PARAM_STR);
         $stmt->execute();
-        
+
         $message = "<h2>こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります。<br><a href='https://junzs.net/someyafes/user/userid/'>こちら</a>からQRコードを取得してください。</h2>";
     }
 }
@@ -53,7 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <?php
-    if (isset($message)) {
+    if ($customerid == "	
+    <br />
+    <b>Warning</b>:  Undefined array key ") {
         echo $message;
     }
     ?>
