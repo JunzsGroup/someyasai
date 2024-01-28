@@ -38,7 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <?php
-    if (isset($customerid)) {
+    if ($customerid == "<br />
+    <b>Warning</b>:  Undefined array key 
+    ") {
         echo $message;
     }
     ?>
