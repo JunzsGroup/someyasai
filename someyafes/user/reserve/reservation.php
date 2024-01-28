@@ -28,6 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
     } else {
+        $customerid = $_POST['customerid'];
+        $class = $_POST['class'];
+        $time = $_POST['enter_time'];
+
+        $sql = "INSERT INTO reserve (id, class, time) VALUES (:customerid, :class, :time)";
+        $stmt = $PDO->prepare($sql);
+        $stmt->bindParam(':customerid', $customerid, PDO::PARAM_STR);
+        $stmt->bindParam(':class', $class, PDO::PARAM_STR);
+        $stmt->bindParam(':time', $time, PDO::PARAM_STR);
+        $stmt->execute();
+        
         $message = "<h2>こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります。<br><a href='https://junzs.net/someyafes/user/userid/'>こちら</a>からQRコードを取得してください。</h2>";
     }
 }
