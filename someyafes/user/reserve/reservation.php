@@ -12,8 +12,9 @@ try {
 } catch (PDOException $e) {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 }
-$message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['customerid'])) {
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
         $time = $_POST['enter_time'];
@@ -24,7 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':class', $class, PDO::PARAM_STR);
         $stmt->bindParam(':time', $time, PDO::PARAM_STR);
         $stmt->execute();
-        
+
+        $message = "<h2>{$class}で{$time}の時間にお待ちしております。入場の際はQRコードを提示してください。</h2>";
+    } else {
+        $message = "<h2>こちらにアクセスしたあとに予約してください。到着時に本人確認ができなくなります。<br><a href='https://junzs.net/someyafes/user/userid/'>こちら</a>からQRコードを取得してください。</h2>";
+    }
 }
 
 ?>
@@ -36,10 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>予約</title>
 </head>
 <body>
-<?php
-    if ($customerid == "<br />
-    <b>Warning</b>:  Undefined array key 
-    ") {
+    <?php
+    if (isset($message)) {
         echo $message;
     }
     ?>
