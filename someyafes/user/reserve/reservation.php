@@ -14,6 +14,26 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['customerid']) && isset($_POST['class']) && isset($_POST['enter_time'])) {
+        $customerid = $_POST['customerid'];
+        $class = $_POST['class'];
+        $time = $_POST['enter_time'];
+
+        $sql = "INSERT INTO reserve (id, class, time) VALUES (:customerid, :class, :time)";
+        $stmt = $PDO->prepare($sql);
+        $stmt->bindParam(':customerid', $customerid, PDO::PARAM_STR);
+        $stmt->bindParam(':class', $class, PDO::PARAM_STR);
+        $stmt->bindParam(':time', $time, PDO::PARAM_STR);
+        $stmt->execute();
+
+        echo "success";
+    } else {
+        echo "err";
+    }
+}
+
+
+/*if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['customerid'])) {
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
