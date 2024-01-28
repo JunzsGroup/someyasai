@@ -41,8 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>予約</title>
 </head>
 <body>
-    <?php
-    if (isset($message)) {
+<?php
+    if (isset($customerid)) {
         echo $message;
     }
     ?>
