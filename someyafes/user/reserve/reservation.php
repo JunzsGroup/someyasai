@@ -14,7 +14,7 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['customerid']) || $_POST['customerid'] == '<br /><b>Warning</b>:  Undefined array key') {
+    if  ($_POST['customerid'] == '') {
         echo "err";
     } else {
         $customerid = $_POST['customerid'];
