@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>郵便番号検索</title>
+</head>
+
+<body>
+    <p>
+        <input type="text" id="zipcode_f">
+        <button type="button" id="search_b">検索</button><br>
+        都道府県: <span id="address1_s"></span><br>
+        市区町村: <span id="address2_s"></span><br>
+        町域: <span id="address3_s"></span><br>
+    </p>
+    <script>
+        const zipcode_f = document.querySelector("#zipcode_f");
+        const search_b = document.querySelector("#search_b");
+        const address1_s = document.querySelector("#address1_s");
+        const address2_s = document.querySelector("#address2_s");
+        const address3_s = document.querySelector("#address3_s");
+
+        function onSearch(e) {
+            const ENDPOINT = "https://zipcloud.ibsnet.co.jp/api/search";
+            const url = `${ENDPOINT}?zipcode=${zipcode_f.value}`;
+            fetch(url).then(
+                function (response) {
+                    response.json().then(
+                        (data) => {
+                            address1_s.textContent = data.results[0].address1;
+                            address2_s.textContent = data.results[0].address2;
+                            address3_s.textContent = data.results[0].address3;
+                        }
+                    );
+                },
+                (reason) => {
+                    address1_s.textContent = "エラー: " + reason;
+                }
+            );
+            address1_s.textContent = "検索中...";
+            address2_s.textContent = "";
+            address3_s.textContent = "";
+        }
+        search_b.addEventListener("click", onSearch);
+    </script>
+</body>
+
+</html>

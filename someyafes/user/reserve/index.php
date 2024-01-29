@@ -64,7 +64,7 @@ input[type="submit"]:hover {
     <? session_start(); ?>
     <div class="form">
     <form action="reservation.php" method="POST">
-        <input type="hidden" name="customerid" value="<?php echo @$_SESSION['customerid'] ?? ''; ?>">
+        <input type="hidden" name="customerid" value="<?php echo @$_COOKIE['customerid'] ?? ''; ?>">
         <label for="class">行きたいクラス:</label>
         <select name="class" id="class">
             <?php

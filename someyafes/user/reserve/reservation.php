@@ -16,7 +16,7 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if  ($_POST['customerid'] == '') {
         echo "err";
-    } else {
+    } else { 
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
         $time = $_POST['enter_time'];

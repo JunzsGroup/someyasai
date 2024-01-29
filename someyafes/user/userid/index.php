@@ -45,9 +45,9 @@
         require_once 'config.php';
         session_start();
     
-        if (!isset($_SESSION['customerid'])) {
+        if (!isset($_COOKIE['customerid'])) {
             $customerid = bin2hex(random_bytes(16));
-            $_SESSION['customerid'] = $customerid;
+            setcookie ('customerid', $customerid, time()+ 60*60*24);
         
             try {
                 $PDO = new PDO($dsn, $user, $password);
@@ -61,16 +61,16 @@
                 exit('データベースに接続できませんでした。' . $e->getMessage());
             }
         } else {
-            $userid = $_SESSION['customerid'];
+            $userid = $_COOKIE['customerid'];
         }
 
 
         
-        if (!isset($_SESSION['customerid'])) {
+        if (!isset($_COOKIE['customerid'])) {
             $customerid = bin2hex(random_bytes(16));
-            $_SESSION['customerid'] = $customerid;
+            $_COOKIE['customerid'] = $customerid;
         } else {
-            $customerid = $_SESSION['customerid'];
+            $customerid = $_COOKIE['customerid'];
         }
         
         $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $customerid;
