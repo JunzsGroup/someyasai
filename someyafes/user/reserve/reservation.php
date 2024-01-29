@@ -14,7 +14,8 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['customerid']) && isset($_POST['class']) && isset($_POST['enter_time'])) {
+    if ($customerid == '<br />
+    <b>Warning</b>:  Undefined array key') {
         $customerid = $_POST['customerid'];
         $class = $_POST['class'];
         $time = $_POST['enter_time'];
