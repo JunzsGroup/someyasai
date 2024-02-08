@@ -16,7 +16,7 @@ try {
     $class = $_POST['class'];
 
     //$sql = "INSERT INTO queue (class, code) VALUES (:class, :code)";
-    $sql = "UPDATE `queue` SET `leaving` = NOW(); WHERE `queue`.`code` = :code";
+    $sql = "UPDATE `queue` SET `leaving` = NOW() WHERE `queue`.`code` = :code";
     $stmt = $PDO->prepare($sql);
     $stmt = $PDO->prepare($sql);
     $stmt->bindValue(':code', $code, PDO::PARAM_STR);
