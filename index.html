@@ -4,54 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文化祭をより便利に</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: #F0F0F0;
-        }
-        nav {
-            background-color: #FFFFFF;
-            padding: 10px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        header {
-            text-align: center;
-            padding-top: 40px;
-            padding-bottom: 80px;
-        }
-        section {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            margin-bottom: 80px;
-        }
-        .text-center {
-            padding-left: 40px;
-            padding-right: 40px;
-        }
-        footer {
-            background-color: #FFFFFF;
-            padding: 10px;
-            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+        body { font-family: 'Noto Sans JP', sans-serif; }
     </style>
 </head>
 <body>
     <!-- Simplified navbar -->
-    <nav>
-        <img src="logotext.svg" alt="Logo">
-        <!-- Content here -->
+    <nav class="nav">
+        <img src="./logotext.svg" class="logotext" alt="logo">
+        <ul class="nav-links">
+            <li><a href="#hero-section">ABOUT</a></li>
+            <li><a href="#contactmail">CONTACT US</a></li>
+        </ul>
     </nav>
     <!-- Main header -->
-    <!-- ... -->
+    <header class="header1">
+        <h1 class="text-catchcopy">もっとワクワクしよう</h1>
+        <button class="buycontent1" onclick="location.href='schoolfes-web-app.php'">school fes web app</button>
+    </header>
     <!-- Feature sections -->
-    <!-- ... -->
-    <!-- Placeholder for the illustration -->
-    <!-- ... -->
+    <section class="section1">
+        <div class="waittimetext">
+            <h2>What is Junzs</h2>
+            <p class>Junzsとは上田染谷丘高校の探究活動の中で生まれたグループです<br>文化祭の待ち時間をわかるようになったらいいなぁという思いから活動を始めました<br>現在文化祭専用の待ち時間表示、予約サイトを作るプロジェクトが進行中です</p>
+        </div>
+        <div class="text-center px-10">
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">メンバー紹介</h2>
+        <div class="member-intro">
+            <div class="member">
+                <img src="ooyama.jpg" alt="ooyama" class="member-img-left">
+                <h2 class="member-desc-right">大山君</h2>
+                <p class="member-desc-right"></p>
+            </div>
+            <div class="member">
+                <img src="tsutsumi.jpg" alt="tsutsumi" class="member-img-right">
+                <h2 class="member-desc-left">つつみん</h2>
+                <p class="member-desc-left">Member 2 description...</p>
+            </div>
+            <div class="member">
+                <img src="sano.jpg" alt="sano" class="member-img-left">
+                <h2 class="member-desc-right">さのくん</h2>
+                <p class="member-desc-right">Member 3 description...</p>
+            </div>
+            <div class="member">
+                <img src="ishi.jpg" alt="ishi" class="member-img-right">
+                <h2 class="member-desc-left">いしいちゃん</h2>
+                <p class="member-desc-left">Member 4 description...</p>
+            </div>
+        </div>
+        <div class="project-section">
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">現在進行中のプロジェクト</h2>
+            <div class="project-content">
+                <img src="project-image.jpg" alt="Project Image" class="project-img">
+                <div class="project-description">
+                    <h2>Schoolfes web app</h2>
+                    <p>文化祭の待ち時間の表示や予約機能などをつけることができるウェブアプリですScholfes web app を導入することで文化祭のUX改善に役立ちます！詳しくは
+                    <a href="schoolfes-web-app.php">こちら</a>を参照してください。</p>
+                </div>
+            </div>
+        </div>
+        <div class="news-section">
+            <h2 class="text-lg font-semibold text-gray-800 mb-3">最新のニュース</h2>
+            <div class="news-content">
+                <a href="https://www.google.com" target="_blank">
+                    <img src="news-image.jpg" alt="News Image" class="news-img">
+                </a>
+                <div class="news-description">
+                    <h2>現在のニュースはありません</h2>
+                    <p>ニュースが入り次第更新します</p>
+                </div>
+            </div>
+        </div>
     <!-- Simplified footer -->
-    <footer>
-        <p>&copy; 2022 Your Company Name</p>
-    </footer>
+<footer class="footer">
+    <p>© 2024 Junzs. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>
