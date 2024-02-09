@@ -6,72 +6,112 @@
     <title>文化祭をより便利に</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-        font-family: 'Noto Sans JP', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-        }
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
 
-         .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+.nav img.logotext {
+    width: 100px;
+    height: auto;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+}
+
+.header1 {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+.section1 {
+    padding: 50px 0;
+}
+
+.waittimetext {
+    display: flex;
+    align-items: center;
+}
+
+.waittimetext img {
+    width: 50%;
+}
+
+.waittimetext .whju {
+    width: 50%;
+}
+
+.member-intro {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.member {
+    width: 45%;
+    margin-bottom: 20px;
+}
+
+.member-desc-left {
+    text-align: left;
+}
+
+.member-desc-right {
+    text-align: right;
+}
+
+.member-img-left, .member-img-right {
+    width: 100%;
+}
+
+.project-section, .news-section {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .nav, .header1, .section1, .footer {
         padding: 20px;
-        background-color: #333;
-        color: #fff;
-        }
+    }
 
-        .nav-links {
-        list-style: none;
-        }   
+    .waittimetext, .member-intro {
+        flex-direction: column;
+    }
 
-        .nav-links li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .header1 {
-            text-align: center;
-            padding: 50px 0;
-            background-color: #f8f9fa;
-        }
-
-        .section1 {
-            padding: 50px 0;
-        }
-
-        .member-intro {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .member {
-            width: 45%;
-            margin-bottom: 20px;
-        }
-
-        .member-img-left, .member-img-right {
-            width: 100%;
-        }
-
-        .project-section, .news-section {
-            padding: 50px 0;
-            background-color: #f8f9fa;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
+    .waittimetext img, .waittimetext .whju, .member {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
