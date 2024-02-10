@@ -90,7 +90,7 @@ header {
         margin-left: 20px; /* 左の余白 */
     }
 </style>
-<img src="../logo.png" alt="ロゴ" class="logo">
+<img src="../logotext.jpg" alt="ロゴ" class="logo">
 </head>
 <body>
 <?

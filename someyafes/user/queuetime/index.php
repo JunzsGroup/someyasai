@@ -119,7 +119,7 @@ $pdo = null;
 
       </style>
     <title>待ち時間</title>
-    <img src="../logo.png" alt="ロゴ" class="logo">
+    <img src="../logo.jpg" alt="ロゴ" class="logo">
 </head>
 <body>
 

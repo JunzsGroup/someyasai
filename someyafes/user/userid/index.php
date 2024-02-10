@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザーID</title>
-    <img src="../logo.png" alt="ロゴ" class="logo">
+    <img src="../logo.jpg" alt="ロゴ" class="logo">
     <style>
     .logo {
         height: 100px; 

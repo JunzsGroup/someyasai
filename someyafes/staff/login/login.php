@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <form action="" method="post">
         <div class="logo-container">
-            <img src="../logo.png" alt="ロゴ">
+            <img src="../logotext.jpg" alt="ロゴ">
         </div>
     <form action="" method="post">
         <h2>ログイン</h2>

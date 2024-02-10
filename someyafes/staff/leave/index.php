@@ -32,7 +32,7 @@ if(empty($_SESSION['userid'])) {
 </head>
 <body>
 <body>
-    <img src="../logo.png" alt="ロゴ" class="logo">
+    <img src="../logotext.jpg" alt="ロゴ" class="logo">
             <div id="wrapper">
             <video id="video" autoplay muted playsinline></video>
             <canvas id="camera-canvas"></canvas>
