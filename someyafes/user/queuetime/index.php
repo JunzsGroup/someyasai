@@ -117,6 +117,28 @@ $pdo = null;
         margin-left: 20px; 
     }
 
+      @media only screen and (max-width: 800px) {
+      ul.cardlist > li {
+            width: 50%;
+            float: left;
+            box-sizing: border-box;
+        }
+        ul.cardlist > li > a {
+            flex-flow: column wrap;
+            align-items: center;
+            text-align: center;
+        }
+        ul.cardlist > li > a > img {
+            width: 100%;
+            height: auto;
+        }
+        .content {
+            margin-left: 0;
+            width: 100%;
+        }
+
+      }
+
       </style>
     <title>待ち時間</title>
     <img src="../logo.jpg" alt="ロゴ" class="logo">
@@ -129,7 +151,7 @@ $pdo = null;
 
     <li>
     <a href="<?= $wpurls[$queuetime['username']] ?>">
-            <img src="https://placehold.jp/600x400.png" alt="">
+            <img src="https://placehold.jp/900x800.png" alt="">
             <div class="content">
             <p class="classname"><?= $queuetime['username'] ?></p>
             <p class="waittime">待ち時間<?= is_null($queuetime['queuetime']) ? '0' : intval($queuetime['queuetime']) ?>分</p>
