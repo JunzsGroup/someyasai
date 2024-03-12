@@ -63,15 +63,6 @@
         } else {
             $userid = $_COOKIE['customerid'];
         }
-
-
-        
-        if (!isset($_COOKIE['customerid'])) {
-            $customerid = bin2hex(random_bytes(16));
-            $_COOKIE['customerid'] = $customerid;
-        } else {
-            $customerid = $_COOKIE['customerid'];
-        }
         
         $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $customerid;
     ?>
