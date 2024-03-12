@@ -83,10 +83,6 @@
     }
 
     @media (max-width: 768px) {
-      .header {
-        flex-direction: column;
-        align-items: center;
-      }
 
 
       .nav {
@@ -105,26 +101,37 @@
       border-radius: 8px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-
     @media (max-width: 768px) {
-      .nav-menu {
-        display: none;
-      }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 
-      .hamburger-menu {
-        display: block;
-      }
-    }
+  .header img {
+    margin-bottom: 1rem;
+  }
 
-    @media (min-width: 769px) {
-      .nav-menu {
-        display: flex;
-      }
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
 
-      .hamburger-menu {
-        display: none;
-      }
-    }
+  .nav a {
+    margin-bottom: 0.5rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .card-group {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .fesapp img {
+    max-width: 80%;
+  }
+}
   </style>
     <div class="bg-white pb-6 sm:pb-8 lg:pb-12">
       <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
