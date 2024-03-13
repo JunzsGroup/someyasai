@@ -1,31 +1,33 @@
 <?php
-echo $_POST['qr'];
+require_once 'config.php';
+session_start();
 
-if (!isset($_POST['qr'])  ||  $_POST['qr']===''){
+if (empty($_SESSION['userid'])) {
+    header('Location: ../login/login.php');
+    exit();
+}
+
+if (!isset($_POST['qr']) || $_POST['qr'] === '') {
     echo 'QRコードが読み取られません';
     exit;
 }
 
-require_once 'config.php';
-
 try {
-    $PDO = new PDO($dsn, $user, $password);
-    $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $code = $_POST['qr'];
-    $class = $_POST['class'];
+    $class = $_SESSION['username'];
 
-    //$sql = "INSERT INTO queue (class, code) VALUES (:class, :code)";
-    $sql = "UPDATE `queue` SET `enter` = NOW() WHERE `queue`.`code` = :code";
-    $stmt = $PDO->prepare($sql);
-    $stmt->bindValue(':code', $code, PDO::PARAM_STR);
+    // QRコードを読み取られたユーザーのIDをstartのDBに送る
+    $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':code', $code);
+    $stmt->bindParam(':class', $class);
     $stmt->execute();
 
-    echo "<p>code: ".$code."</p>";
-    echo "<p>class: ".$class."</p>";
-    echo '<p>で登録しました。</p>';
+    echo "入場処理が完了しました。";
 } catch (PDOException $e) {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 }
-
 ?>
