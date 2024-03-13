@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'config.php';
-
+session_start();
 try {
     $PDO = new PDO($dsn, $user, $password);
     $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -31,8 +31,20 @@ try {
     <body class="bg-white">
       <header class="bg-white shadow">
          <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-         <img src="../logotext.jpg" alt="ロゴ" class="w-40 h-auto">
-    </nav>
+            <a href="junzs.net">
+                 <img src="../logotext.jpg" alt="ロゴ" class="w-40 h-auto">
+            </a>
+         </nav>
 </header>
+<form action="next.php" method="POST">
+    <select name="mp">
+    <?php
+    for($i=1; $i<=100; $i++){
+        echo "<option value='{$i}'>{$i}</option>";
+    }
+    ?>
+    </select>
+    <input type="submit">
+</form>
 </body>
 </html>

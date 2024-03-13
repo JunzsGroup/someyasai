@@ -1,5 +1,4 @@
 <?php
-echo $_POST['mp'];
 
 if (!isset($_POST['mp'])  ||  $_POST['mp']===''){
     echo '人数を設定してください';
@@ -14,7 +13,6 @@ try {
     $PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $maxpeople = $_POST['mp'];
-    $class = $_POST['class'];
     $class = $_SESSION['username'];
 
     //$sql = "INSERT INTO queue (class, code) VALUES (:class, :code)";
