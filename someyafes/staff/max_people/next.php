@@ -18,7 +18,7 @@ try {
     //$sql = "INSERT INTO queue (class, code) VALUES (:class, :code)";
     $sql = "INSERT INTO maxpeople (class,maxpeople) VALUES (:class, :maxpeople)";
     $stmt = $PDO->prepare($sql);
-    $stmt = $PDO->prepare($sql);
+    $stmt->bindValue(':class', $class, PDO::PARAM_STR); // この行を追加
     $stmt->bindValue(':maxpeople', $maxpeople, PDO::PARAM_STR);
     $stmt->execute();
 
