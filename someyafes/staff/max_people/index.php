@@ -18,33 +18,50 @@ try {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>最大収容人数設定ページ（仮）</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <title>最大収容人数設定ページ</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .container {
+            @apply max-w-5xl mx-auto px-4;
+        }
+    </style>
 </head>
-<body>
-   
-    <body class="bg-white">
-      <header class="bg-white shadow">
-         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <nav class="container py-4 flex justify-between items-center">
             <a href="junzs.net">
-                 <img src="../logotext.jpg" alt="ロゴ" class="w-40 h-auto">
+                <img src="../logotext.jpg" alt="ロゴ" class="w-40 h-auto">
             </a>
-         </nav>
-</header>
-<form action="next.php" method="POST">
-    <select name="mp">
-    <?php
-    for($i=1; $i<=100; $i++){
-        echo "<option value='{$i}'>{$i}</option>";
-    }
-    ?>
-    </select>
-    <input type="submit">
-</form>
+        </nav>
+    </header>
+
+    <main class="container py-8">
+        <h1 class="text-3xl font-bold mb-4">最大収容人数設定</h1>
+        <form action="next.php" method="POST" class="bg-white shadow-md rounded-lg p-6">
+            <div class="mb-4">
+                <label for="mp" class="block text-gray-700 font-bold mb-2">最大収容人数</label>
+                <select name="mp" id="mp" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <?php
+                    for ($i = 1; $i <= 100; $i++) {
+                        echo "<option value='{$i}'>{$i}</option>";
+                    }
+                    ?>
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                送信
+            </button>
+        </form>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container">
+            <p class="text-center">&copy; 2023 Your Company. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
