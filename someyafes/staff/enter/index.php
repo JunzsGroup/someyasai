@@ -64,23 +64,5 @@ $currentPeople = $stmt->fetchColumn();
     </div>
     <script src="./jsQR.js"></script>
     <script src="./script.js"></script>
-    <script>
-        const form = document.getElementById('entry-form');
-        const statusMessage = document.getElementById('status-message');
-        const submitBtn = document.getElementById('submit-btn');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            submitBtn.disabled = true;
-            const formData = new FormData(form);
-            const response = await fetch('next.php', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.text();
-            statusMessage.innerHTML = data;
-            submitBtn.disabled = false;
-        });
-    </script>
 </body>
 </html>
