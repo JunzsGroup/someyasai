@@ -19,29 +19,25 @@ try {
     $code = $_POST['qr'];
     $class = $_SESSION['username'];
 
-    // 待ち行列のユーザー情報を取得
-// 読み取られたQRコードのコード
-$scannedCode = $_POST['qr'];
+    // 読み取られたQRコードのユーザーのstart時間を取得
+    $sql = "SELECT start FROM queue WHERE code = :code AND class = :class";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':code', $code);
+    $stmt->bindParam(':class', $class);
+    $stmt->execute();
+    $scannedUserStart = $stmt->fetchColumn();
 
-// 読み取られたQRコードのユーザーのstart時間を取得
-$sql = "SELECT start FROM queue WHERE code = :code AND class = :class";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':code', $scannedCode);
-$stmt->bindParam(':class', $class);
-$stmt->execute();
-$scannedUserStart = $stmt->fetchColumn();
-
-// 読み取られたQRコードの人より先に並んでいる人のみを取得
-$sql = "SELECT q.code, q.skipped, c.number
-        FROM queue q
-        JOIN customer c ON q.code = c.customerid
-        WHERE q.class = :class AND q.enter IS NULL AND q.leaving IS NULL AND q.start < :scannedUserStart
-        ORDER BY q.start ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':class', $class);
-$stmt->bindParam(':scannedUserStart', $scannedUserStart);
-$stmt->execute();
-$waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // (読み取られたQRコードの人よりも先に並んでいる人)
+    $sql = "SELECT q.code, q.skipped, c.number
+            FROM queue q
+            JOIN customer c ON q.code = c.customerid
+            WHERE q.class = :class AND q.enter IS NULL AND q.leaving IS NULL AND q.start < :scannedUserStart
+            ORDER BY q.start ASC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':class', $class);
+    $stmt->bindParam(':scannedUserStart', $scannedUserStart);
+    $stmt->execute();
+    $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     //skippedの値の定義
     $sql = "SELECT skipped FROM queue WHERE code = :code AND class = :class";
@@ -49,48 +45,40 @@ $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->bindParam(':code', $code);
     $stmt->bindParam(':class', $class);
     $stmt->execute();
-    $skipped = $stmt->fetchColumn();
+    $scannedUserSkipped = $stmt->fetchColumn();
 
-    // QRコードを読み取られたユーザーがスキップ対象かどうかを確認
-    $shouldSkip = false;
+    // 読み取られたQRコードの人より先に並んでいるユーザーがいるかどうかを確認
+    $hasEarlierUsers = !empty($waitingUsers);
+
+    // 先に並んでいた人がskippedが1の場合は入場処理を許可する
+    $allowEntry = true;
     foreach ($waitingUsers as $user) {
-        if ($user['code'] === $code) {
-            $shouldSkip = true;
-            $skipped = $user['skipped'];
+        if ($user['skipped'] !== 1) {
+            $allowEntry = false;
             break;
         }
     }
 
-    // 一覧の人がskippedが1の人しかいない場合は通常の入場処理を行う
-    $hasNonSkippedUsers = false;
-    foreach ($waitingUsers as $user) {
-        if ($user['skipped'] === null || $user['skipped'] === 2) {
-            $hasNonSkippedUsers = true;
-            break;
-        }
-    }
+    if ($scannedUserSkipped === 1) {
+        echo "<div class='container'>";
+        echo "<p>このユーザーは指定された時間にきていません。指定された時間にお越しください。</p>";
+        echo "<a href='index.php' class='back-btn'>戻る</a>";
+        echo "</div>";
+    } elseif ($scannedUserSkipped === 2) {
+        // skipped=2の場合は入場処理　スキップを２にするのは時間指定予約の時間が近づいたら
+        $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND skipped = 2 AND enter IS NULL";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':code', $code);
+        $stmt->bindParam(':class', $class);
+        $stmt->execute();
 
-    if ($shouldSkip) {
-        if ($skipped === 1) {
-            echo "<div class='container'>";
-            echo "<p>このユーザーはスキップされています。指定された時間にお越しください。</p>";
-            echo "<a href='index.php' class='back-btn'>戻る</a>";
-            echo "</div>";
-        } else {
-            // skipped=2の場合は入場処理
-            $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND skipped = 2 AND enter IS NULL";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':code', $code);
-            $stmt->bindParam(':class', $class);
-            $stmt->execute();
-
-            echo "<div class='container'>";
-            echo "<p>入場処理が完了しました。</p>";
-            echo "<a href='index.php' class='back-btn'>戻る</a>";
-            echo "</div>";
-        }
-    } elseif (!$hasNonSkippedUsers) {
-        // skippedの値がNULLまたは1の場合は入場処理を行う
+        echo "<div class='container'>";
+        echo "<p>入場処理が完了しました。</p>";
+        echo "<a href='index.php' class='back-btn'>戻る</a>";
+        echo "</div>";
+    } elseif (!$hasEarlierUsers || $allowEntry) {
+        // skippedの値がNULLの場合かつは読み取られたQRコードの人より先に並んでいる人がいない場合、
+        // もしくは先に並んでいる人全員がskip対象の場合は入場処理を行う
         $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND (skipped IS NULL OR skipped = 1) AND enter IS NULL";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':code', $code);
@@ -103,7 +91,7 @@ $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo "</div>";
     } else {
         echo "<div class='container'>";
-        echo "<p>skippedがNULLまたは2の人がいるため、この人の入場処理は行われませんでした。</p>";
+        echo "<p>skippedがNULLまたは2の人が先に並んでいるため、この人の入場処理は行われませんでした。</p>";
         echo "<a href='index.php' class='back-btn'>戻る</a>";
         echo "</div>";
     }
