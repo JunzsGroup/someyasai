@@ -25,7 +25,13 @@ try {
     $stmt->bindParam(':class', $class);
     $stmt->execute();
     $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    //skippedの値の定義
+    $sql = "SELECT skipped FROM queue WHERE code = :code AND class = :class";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':code', $code);
+    $stmt->bindParam(':class', $class);
+    $stmt->execute();
+    $skipped = $stmt->fetchColumn();
     // QRコードを読み取られたユーザーがスキップ対象かどうかを確認
     $shouldSkip = false;
     foreach ($waitingUsers as $user) {
@@ -36,6 +42,7 @@ try {
         }
     }
 
+
     if ($shouldSkip) {
         if ($skipped === 1) {
             echo "<div class='container'>";
@@ -43,8 +50,8 @@ try {
             echo "<a href='index.php' class='back-btn'>戻る</a>";
             echo "</div>";
         } else {
-            // skipped=2の場合は入場処理
-            $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND skipped = 2 AND enter IS NULL";
+            // skipped=2 or NULLの場合は入場処理
+            $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND (skipped = 2 OR skipped IS NULL) AND enter IS NULL";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':code', $code);
             $stmt->bindParam(':class', $class);
@@ -55,19 +62,8 @@ try {
             echo "<a href='index.php' class='back-btn'>戻る</a>";
             echo "</div>";
         }
-    } else {
-        // skippedの値がNULLの場合は入場処理を行う
-        $sql = "UPDATE queue SET enter = NOW() WHERE code = :code AND class = :class AND skipped IS NULL AND enter IS NULL";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':code', $code);
-        $stmt->bindParam(':class', $class);
-        $stmt->execute();
-    
-        echo "<div class='container'>";
-        echo "<p>入場処理が完了しました。</p>";
-        echo "<a href='index.php' class='back-btn'>戻る</a>";
-        echo "</div>";
     }
+         
 } catch (PDOException $e) {
     exit('データベースに接続できませんでした。' . $e->getMessage());
 }
