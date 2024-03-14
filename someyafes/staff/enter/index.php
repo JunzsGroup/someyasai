@@ -46,7 +46,7 @@ $currentPeople = $stmt->fetchColumn();
         <canvas id="rect-canvas"></canvas><br>
     </div>
     <div class="form">
-        <form id="entry-form">
+        <form id="entry-form" action="next.php" method="post">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
             <br><?php
             echo '' . $_SESSION['username'] . 'としてログイン中';
