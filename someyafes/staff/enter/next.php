@@ -61,7 +61,7 @@ try {
 
     if ($scannedUserSkipped === 1) {
         echo "<div class='container'>";
-        echo "<p>このユーザーは指定された時間にきていません。指定された時間にお越しください。</p>";
+        echo "<p>このユーザーは予約時間にきていません。予約された時間にお越しください。</p>";
         echo "<a href='index.php' class='back-btn'>戻る</a>";
         echo "</div>";
     } elseif ($scannedUserSkipped === 2) {
