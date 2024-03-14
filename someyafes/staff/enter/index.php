@@ -29,13 +29,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':class', $class);
 $stmt->execute();
 $currentPeople = $stmt->fetchColumn();
-
-// 待ち行列のユーザー情報を取得
-$sql = "SELECT code, start FROM queue WHERE class = :class AND enter IS NULL AND leaving IS NULL ORDER BY start ASC";
-$stmt = $pdo->prepare($sql);
-$stmt->bindParam(':class', $class);
-$stmt->execute();
-$waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,7 +46,7 @@ $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <canvas id="rect-canvas"></canvas><br>
     </div>
     <div class="form">
-        <form action="next.php" method="POST">
+        <form id="entry-form">
             QRコード: <input type="text" id="qr-msg" name="qr" value="">
             <br><?php
             echo '' . $_SESSION['username'] . 'としてログイン中';
@@ -63,35 +56,31 @@ $waitingUsers = $stmt->fetchAll(PDO::FETCH_ASSOC);
             // 入場可能かどうかの判断
             if ($currentPeople >= $maxPeople) {
                 echo "<p>入場できません。最大収容人数を超えています。</p>";
-            } else {
-                // QRコードを読み取られたユーザーの前に待ち行列に並んでいるユーザーがいるかどうか検査
-                $shouldSkip = false;
-                $skipList = [];
-                foreach ($waitingUsers as $user) {
-                    if (isset($_POST['qr']) && $user['code'] === $_POST['qr']) {
-                        $shouldSkip = true;
-                        break;
-                    }
-                    $skipList[] = $user['code'];
-                }
-
-                // スキップマークの設定
-                if ($shouldSkip) {
-                    echo "<p>以下のユーザーよりも後に並んでいます:</p>";
-                    echo "<ul>";
-                    foreach ($skipList as $code) {
-                        echo "<li>$code</li>";
-                    }
-                    echo "</ul>";
-                } else {
-                    echo "<p>スキップできます</p>";
-                }
             }
             ?>
-            <input type="submit" value="入場">
+            <div id="status-message"></div>
+            <input type="submit" id="submit-btn" value="入場">
         </form>
     </div>
     <script src="./jsQR.js"></script>
     <script src="./script.js"></script>
+    <script>
+        const form = document.getElementById('entry-form');
+        const statusMessage = document.getElementById('status-message');
+        const submitBtn = document.getElementById('submit-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            const formData = new FormData(form);
+            const response = await fetch('next.php', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.text();
+            statusMessage.innerHTML = data;
+            submitBtn.disabled = false;
+        });
+    </script>
 </body>
 </html>
