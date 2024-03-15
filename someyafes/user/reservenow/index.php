@@ -23,7 +23,7 @@ $classList = $stmt->fetchAll(PDO::FETCH_COLUMN);
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <img src="../logotext.jpg" alt="ロゴ" class="logo">
+    <img src="logotext.jpg" alt="ロゴ" class="logo">
     <div class="container">
         <h1>クラスを選択してください</h1>
         <form action="next.php" method="POST">

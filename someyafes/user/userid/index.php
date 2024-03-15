@@ -47,8 +47,9 @@
     
         if (!isset($_COOKIE['customerid'])) {
             $customerid = bin2hex(random_bytes(16));
-            setcookie('customerid', $customerid, time() + 60*60*24, "/");
             $userid = $customerid;
+            setcookie('customerid', $customerid, time() + 60*60*24, "/");
+  
         
             try {
                 $PDO = new PDO($dsn, $user, $password);
