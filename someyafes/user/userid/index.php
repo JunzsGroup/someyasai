@@ -48,7 +48,7 @@
         if (!isset($_COOKIE['customerid'])) {
             $customerid = bin2hex(random_bytes(16));
             setcookie('customerid', $customerid, time() + 60*60*24, "/");
-            $userid = $_COOKIE['customerid'];
+            $userid = $customerid;
         
             try {
                 $PDO = new PDO($dsn, $user, $password);
@@ -65,7 +65,7 @@
             $userid = $_COOKIE['customerid'];
         }
         
-        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $userid;
+        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" .urlencode($userid);
     ?>
     <br>
     <div class="h2">
