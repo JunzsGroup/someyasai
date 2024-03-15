@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-require_once 'userid.php';
 session_start();
 
 if (!isset($_POST['class']) || $_POST['class'] === '') {
