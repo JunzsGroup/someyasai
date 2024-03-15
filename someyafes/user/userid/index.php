@@ -64,7 +64,7 @@
             $userid = $_COOKIE['customerid'];
         }
         
-        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $customerid;
+        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . $userid;
     ?>
     <br>
     <div class="h2">
