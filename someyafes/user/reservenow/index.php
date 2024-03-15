@@ -7,11 +7,7 @@ try {
     echo 'Connection failed: ' . $e->getMessage();
 }
 session_start();
-if (empty($_SESSION['userid'])) {
-    header('Location: ../login/login.php');
-    exit();
-}
-// クラスリストを取得
+// usersのusernameカラムからクラスの名前を所得
 $sql = "SELECT username FROM users";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
